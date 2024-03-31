@@ -3,9 +3,9 @@ import { knex } from './database'
 
 const app = fastify()
 
-app.get('/', async () => {
-  const test = await knex('sqlite_schema').select('*')
-  return test
+app.get('/transitions', async () => {
+  const transition = await knex('transitions').select('*')
+  return transition
 })
 
 app.listen({ port: 8888 }).then(() => {

@@ -22,6 +22,8 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "@typescript-eslint/no-floating-promises": "off"
+        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/prefer-nullish-coalescing": "off"
     }
 }
