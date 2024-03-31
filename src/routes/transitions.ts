@@ -10,6 +10,18 @@ export async function transitionsRoutes (app: FastifyInstance) {
     return { transitions }
   })
 
+  app.get('/:id', async (request) => {
+    const getTranstionParamsSchema = z.object({
+      id: z.string().uuid()
+    })
+
+    const { id } = getTranstionParamsSchema.parse(request.params)
+
+    const transitions = await knex('transitions').where('id', id).first()
+
+    return { transitions }
+  })
+
   app.post('/', async (request, response) => {
     const createTransitionBodySchema = z.object({
       title: z.string(),
