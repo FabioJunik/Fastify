@@ -4,6 +4,12 @@ import { knex } from '../database'
 import { randomUUID } from 'crypto'
 
 export async function transitionsRoutes (app: FastifyInstance) {
+  app.get('/', async () => {
+    const transitions = await knex('transitions').select()
+
+    return { transitions }
+  })
+
   app.post('/', async (request, response) => {
     const createTransitionBodySchema = z.object({
       title: z.string(),
