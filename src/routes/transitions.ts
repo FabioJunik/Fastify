@@ -22,6 +22,12 @@ export async function transitionsRoutes (app: FastifyInstance) {
     return { transitions }
   })
 
+  app.get('/summary', async () => {
+    const summary = await knex('transitions').sum('amount', { as: 'summary' }).first()
+
+    return { summary }
+  })
+
   app.post('/', async (request, response) => {
     const createTransitionBodySchema = z.object({
       title: z.string(),
