@@ -1,12 +1,11 @@
 import fastify from 'fastify'
-import { knex } from './database'
 import { env } from './env'
+import { transitionsRoutes } from './routes/transitions'
 
 const app = fastify()
 
-app.get('/transitions', async () => {
-  const transition = await knex('transitions').select('*')
-  return transition
+app.register(transitionsRoutes, {
+  prefix: 'transitions'
 })
 
 app.listen({ port: env.PORT }).then(() => {
