@@ -2,28 +2,48 @@ import { type FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { knex } from '../database'
 import { randomUUID } from 'crypto'
+import { checkSessionExists } from '../meddlewares/check-session-exists'
 
 export async function transitionsRoutes (app: FastifyInstance) {
-  app.get('/', async () => {
-    const transitions = await knex('transitions').select()
+  app.get('/', {
+    preHandler: checkSessionExists
+  }, async (request) => {
+    const sessionId = request.cookies.sessionId
+
+    const transitions = await knex('transitions').where({
+      session_id: sessionId
+    })
 
     return { transitions }
   })
 
-  app.get('/:id', async (request) => {
+  app.get('/:id', {
+    preHandler: checkSessionExists
+  },async (request) => {
     const getTranstionParamsSchema = z.object({
       id: z.string().uuid()
     })
 
-    const { id } = getTranstionParamsSchema.parse(request.params)
+    const sessionId = request.cookies.sessionId
 
-    const transitions = await knex('transitions').where('id', id).first()
+    const { id } = getTranstionParamsSchema.parse(request.params)
+    const transitions = await knex('transitions').where({
+      id,
+      session_id: sessionId
+    }).first()
 
     return { transitions }
   })
 
-  app.get('/summary', async () => {
-    const summary = await knex('transitions').sum('amount', { as: 'summary' }).first()
+  app.get('/summary', {
+    preHandler: checkSessionExists
+  },async (request) => {
+    const sessionId = request.cookies.sessionId
+
+    const summary = await knex('transitions')
+    .sum('amount', { as: 'summary' })
+    .where({session_id: sessionId})
+    .first()
 
     return { summary }
   })
