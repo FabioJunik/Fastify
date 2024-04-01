@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint src --ext .ts --fix",
     "dev": "tsx watch src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "knex": "node --loader tsx ./node_modules/knex/bin/cli.js"
   },
   "keywords": [],
@@ -18,10 +18,12 @@
     "fastify": "^4.26.2",
     "knex": "^3.1.0",
     "sqlite3": "^5.1.7",
+    "supertest": "^6.3.4",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.12.2",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "eslint": "^8.57.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
@@ -29,6 +31,7 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "tsx": "^4.7.1",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0"
   }
 }
