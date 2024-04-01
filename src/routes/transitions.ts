@@ -37,10 +37,22 @@ export async function transitionsRoutes (app: FastifyInstance) {
 
     const { amount, title, type } = createTransitionBodySchema.parse(request.body)
 
+    let sessionId = request.cookies.sessionId
+
+    if (!sessionId) {
+      sessionId = randomUUID()
+
+      response.cookie('sessionId', sessionId, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7 // 7 days
+      })
+    }
+
     await knex('transitions').insert({
       id: randomUUID(),
       amount: type === 'credit' ? amount : amount * -1,
-      title
+      title,
+      session_id: sessionId
     })
 
     return response.status(201).send()
