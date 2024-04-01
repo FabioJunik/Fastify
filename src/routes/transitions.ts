@@ -19,14 +19,14 @@ export async function transitionsRoutes (app: FastifyInstance) {
 
   app.get('/:id', {
     preHandler: checkSessionExists
-  },async (request) => {
+  }, async (request) => {
     const getTranstionParamsSchema = z.object({
       id: z.string().uuid()
     })
 
     const sessionId = request.cookies.sessionId
-
     const { id } = getTranstionParamsSchema.parse(request.params)
+
     const transitions = await knex('transitions').where({
       id,
       session_id: sessionId
@@ -37,13 +37,13 @@ export async function transitionsRoutes (app: FastifyInstance) {
 
   app.get('/summary', {
     preHandler: checkSessionExists
-  },async (request) => {
+  }, async (request) => {
     const sessionId = request.cookies.sessionId
 
     const summary = await knex('transitions')
-    .sum('amount', { as: 'summary' })
-    .where({session_id: sessionId})
-    .first()
+      .sum('amount', { as: 'summary' })
+      .where({ session_id: sessionId })
+      .first()
 
     return { summary }
   })

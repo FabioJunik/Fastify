@@ -28,5 +28,6 @@ module.exports = {
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/return-await": "off",
         "@typescript-eslint/consistent-type-imports": "off",
+        "@typescript-eslint/no-misused-promises": "off",
     }
 }
