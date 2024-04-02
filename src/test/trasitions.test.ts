@@ -11,7 +11,7 @@ describe('Transitions routes', () => {
     await app.close()
   })
 
-  it('should be able to create a new trasition ', async () => {
+  it('should be able to create a new trasition', async () => {
     await supertest(app.server).post('/transitions').send({
       title: 'Super Teste de transação',
       amount: 100,
