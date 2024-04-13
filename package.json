@@ -7,7 +7,7 @@
     "lint": "eslint src --ext .ts --fix",
     "dev": "tsx watch src/server.ts",
     "test": "vitest",
-    "knex": "node --loader tsx ./node_modules/knex/bin/cli.js"
+    "knex": "node --no-warnings  --loader tsx ./node_modules/knex/bin/cli.js"
   },
   "keywords": [],
   "author": "",

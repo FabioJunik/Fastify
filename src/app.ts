@@ -1,6 +1,13 @@
-import { env } from './env'
-import { app } from './server'
+import fastify from 'fastify'
+import { transitionsRoutes } from './routes/transitions'
+import cookie from '@fastify/cookie'
 
-app.listen({ port: env.PORT }).then(() => {
-  console.log(`Server is runnig in ${env.PORT}`)
+const app = fastify()
+
+app.register(cookie)
+
+app.register(transitionsRoutes, {
+  prefix: 'transitions'
 })
+
+export { app }
