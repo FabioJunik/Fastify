@@ -7,7 +7,8 @@
     "lint": "eslint src --ext .ts --fix",
     "dev": "tsx watch src/server.ts",
     "test": "vitest",
-    "knex": "node --no-warnings  --loader tsx ./node_modules/knex/bin/cli.js"
+    "knex": "node --no-warnings  --loader tsx ./node_modules/knex/bin/cli.js",
+    "build": "tsup src --out-dir build"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
+    "tsup": "^8.0.2",
     "tsx": "^4.7.1",
     "typescript": "^5.4.3",
     "vitest": "^1.4.0"
