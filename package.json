@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">= 18"
+  },
   "scripts": {
     "lint": "eslint src --ext .ts --fix",
     "dev": "tsx watch src/server.ts",
@@ -18,6 +21,7 @@
     "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "knex": "^3.1.0",
+    "pg": "^8.11.5",
     "sqlite3": "^5.1.7",
     "supertest": "^6.3.4",
     "zod": "^3.22.4"
